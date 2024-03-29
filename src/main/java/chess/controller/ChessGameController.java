@@ -2,6 +2,8 @@ package chess.controller;
 
 import chess.db.ChessGameDBConnector;
 import chess.db.ChessGameDBService;
+import chess.db.PiecesDaoForMysql;
+import chess.db.TurnsDaoForMysql;
 import chess.domain.BoardFactory;
 import chess.domain.ChessGame;
 import chess.domain.position.Positions;
@@ -17,13 +19,16 @@ public class ChessGameController {
     private static final Pattern MOVE_COMMAND_PATTERN = Pattern.compile(
             "^" + Command.MOVE.command() + "\\s+(\\w\\d\\s+\\w\\d)$");
 
-    private final ChessGameDBService chessGameDbService = new ChessGameDBService(new ChessGameDBConnector());
+    private final ChessGameDBService chessGameDbService;
     private final InputView inputView;
     private final OutputView outputView;
 
     public ChessGameController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
+        ChessGameDBConnector connector = new ChessGameDBConnector();
+        this.chessGameDbService = new ChessGameDBService(new PiecesDaoForMysql(connector),
+                new TurnsDaoForMysql(connector));
     }
 
     public void run() {

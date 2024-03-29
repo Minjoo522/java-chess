@@ -15,9 +15,9 @@ public class ChessGameDBService {
     private final PiecesDao piecesDao;
     private final TurnsDao turnsDao;
 
-    public ChessGameDBService(ChessGameDBConnector connector) {
-        this.piecesDao = new PiecesDao(connector);
-        this.turnsDao = new TurnsDao(connector);
+    public ChessGameDBService(PiecesDao piecesDao, TurnsDao turnsDao) {
+        this.piecesDao = piecesDao;
+        this.turnsDao = turnsDao;
     }
 
     public boolean hasPreviousData() {
