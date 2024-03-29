@@ -4,7 +4,7 @@ import chess.dto.TurnDto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StubTurnsDao implements TurnsDao {
+public class FakeTurnsDao implements TurnsDao {
     private final List<TurnDto> turns = new ArrayList<>();
 
     @Override

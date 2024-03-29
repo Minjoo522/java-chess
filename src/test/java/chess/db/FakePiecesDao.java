@@ -4,7 +4,7 @@ import chess.dto.PieceDto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StubPiecesDao implements PiecesDao {
+public class FakePiecesDao implements PiecesDao {
     private final List<PieceDto> pieces = new ArrayList<>();
 
     @Override

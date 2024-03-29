@@ -3,8 +3,8 @@ package chess.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-import chess.db.StubPiecesDao;
-import chess.db.StubTurnsDao;
+import chess.db.FakePiecesDao;
+import chess.db.FakeTurnsDao;
 import chess.domain.ChessGame;
 import chess.domain.color.Color;
 import chess.domain.piece.Piece;
@@ -22,9 +22,9 @@ class ChessGameServiceTest {
 
     @BeforeEach
     void setUp() {
-        StubPiecesDao stubPiecesDao = new StubPiecesDao();
-        StubTurnsDao stubTurnsDao = new StubTurnsDao();
-        chessGameService = new ChessGameService(stubPiecesDao, stubTurnsDao);
+        FakePiecesDao fakePiecesDao = new FakePiecesDao();
+        FakeTurnsDao fakeTurnsDao = new FakeTurnsDao();
+        chessGameService = new ChessGameService(fakePiecesDao, fakeTurnsDao);
     }
 
     @Test
