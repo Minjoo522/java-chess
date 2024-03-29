@@ -126,4 +126,4 @@ public abstract boolean isKing();
 - [x] ChessGameDBService 이름 변경
 - [x] DBConnector 생성자
 - [ ] game 테이블
-- [ ] ChessGameDBConnector null -> 예외 던지기
+- [x] ChessGameDBConnector null -> 예외 던지기
