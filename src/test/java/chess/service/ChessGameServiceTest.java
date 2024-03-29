@@ -1,8 +1,10 @@
-package chess.db;
+package chess.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import chess.db.StubPiecesDao;
+import chess.db.StubTurnsDao;
 import chess.domain.ChessGame;
 import chess.domain.color.Color;
 import chess.domain.piece.Piece;
@@ -10,7 +12,6 @@ import chess.domain.piece.PieceType;
 import chess.domain.piece.pawn.WhiteFirstPawn;
 import chess.domain.piece.sliding.Rook;
 import chess.domain.position.Position;
-import chess.service.ChessGameService;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
