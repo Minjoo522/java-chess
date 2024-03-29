@@ -1,7 +1,7 @@
 package chess.controller;
 
 import chess.db.ChessGameDBConnector;
-import chess.db.ChessGameDBService;
+import chess.service.ChessGameService;
 import chess.db.PiecesDaoForMysql;
 import chess.db.TurnsDaoForMysql;
 import chess.domain.BoardFactory;
@@ -19,7 +19,7 @@ public class ChessGameController {
     private static final Pattern MOVE_COMMAND_PATTERN = Pattern.compile(
             "^" + Command.MOVE.command() + "\\s+(\\w\\d\\s+\\w\\d)$");
 
-    private final ChessGameDBService chessGameDbService;
+    private final ChessGameService chessGameService;
     private final InputView inputView;
     private final OutputView outputView;
 
@@ -27,7 +27,7 @@ public class ChessGameController {
         this.inputView = inputView;
         this.outputView = outputView;
         ChessGameDBConnector connector = new ChessGameDBConnector();
-        this.chessGameDbService = new ChessGameDBService(new PiecesDaoForMysql(connector),
+        this.chessGameService = new ChessGameService(new PiecesDaoForMysql(connector),
                 new TurnsDaoForMysql(connector));
     }
 
@@ -57,8 +57,8 @@ public class ChessGameController {
     }
 
     private ChessGame registerChessGame() {
-        if (chessGameDbService.hasPreviousData()) {
-            return chessGameDbService.getCurrentChessGame();
+        if (chessGameService.hasPreviousData()) {
+            return chessGameService.getCurrentChessGame();
         }
         return new ChessGame(new BoardFactory().getInitialBoard());
     }
@@ -128,7 +128,7 @@ public class ChessGameController {
 
     private boolean isNotEnd(ChessGame chessGame, String command) {
         if (Command.END.sameWith(command)) {
-            chessGameDbService.saveGame(chessGame);
+            chessGameService.saveGame(chessGame);
             return false;
         }
         return true;

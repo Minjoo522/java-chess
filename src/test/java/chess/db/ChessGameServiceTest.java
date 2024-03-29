@@ -10,20 +10,20 @@ import chess.domain.piece.PieceType;
 import chess.domain.piece.pawn.WhiteFirstPawn;
 import chess.domain.piece.sliding.Rook;
 import chess.domain.position.Position;
+import chess.service.ChessGameService;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class ChessGameDBServiceTest {
-    private ChessGameDBService chessGameDBService;
+class ChessGameServiceTest {
+    private ChessGameService chessGameService;
 
     @BeforeEach
     void setUp() {
         StubPiecesDao stubPiecesDao = new StubPiecesDao();
         StubTurnsDao stubTurnsDao = new StubTurnsDao();
-        chessGameDBService = new ChessGameDBService(stubPiecesDao, stubTurnsDao);
+        chessGameService = new ChessGameService(stubPiecesDao, stubTurnsDao);
     }
 
     @Test
@@ -35,9 +35,9 @@ class ChessGameDBServiceTest {
         );
         ChessGame chessGame = new ChessGame(board, Color.BLACK);
 
-        chessGameDBService.saveGame(chessGame);
+        chessGameService.saveGame(chessGame);
 
-        assertThat(chessGameDBService.hasPreviousData()).isTrue();
+        assertThat(chessGameService.hasPreviousData()).isTrue();
     }
 
 
@@ -50,16 +50,16 @@ class ChessGameDBServiceTest {
         );
         ChessGame chessGame = new ChessGame(board, Color.BLACK);
 
-        chessGameDBService.saveGame(chessGame);
+        chessGameService.saveGame(chessGame);
 
         assertAll(
                 () -> assertThat(
-                        chessGameDBService.getCurrentChessGame().collectBoard()).containsExactlyInAnyOrderEntriesOf(
+                        chessGameService.getCurrentChessGame().collectBoard()).containsExactlyInAnyOrderEntriesOf(
                         Map.of(
                                 new Position(1, 1), PieceType.WHITE_ROOK,
                                 new Position(1, 2), PieceType.WHITE_FIRST_PAWN
                         )),
-                () -> assertThat(chessGameDBService.getCurrentChessGame().turn()).isEqualTo(Color.BLACK)
+                () -> assertThat(chessGameService.getCurrentChessGame().turn()).isEqualTo(Color.BLACK)
         );
     }
 }

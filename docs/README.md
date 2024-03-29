@@ -123,7 +123,7 @@ public abstract boolean isKing();
   - [x] 도메인을 서비스에서 만들어서 반환
 - [x] DBConnector 네이밍 & 역할
 - [x] PieceType : 생성자 사용으로 통일
-- [ ] ChessGameDBService 이름 변경
+- [x] ChessGameDBService 이름 변경
 - [ ] DBConnector 생성자
 - [ ] game 테이블
 - [ ] ChessGameDBConnector null -> 예외 던지기

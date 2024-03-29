@@ -1,5 +1,7 @@
-package chess.db;
+package chess.service;
 
+import chess.db.PiecesDao;
+import chess.db.TurnsDao;
 import chess.domain.ChessGame;
 import chess.domain.color.Color;
 import chess.domain.piece.Piece;
@@ -11,11 +13,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ChessGameDBService {
+public class ChessGameService {
     private final PiecesDao piecesDao;
     private final TurnsDao turnsDao;
 
-    public ChessGameDBService(PiecesDao piecesDao, TurnsDao turnsDao) {
+    public ChessGameService(PiecesDao piecesDao, TurnsDao turnsDao) {
         this.piecesDao = piecesDao;
         this.turnsDao = turnsDao;
     }
