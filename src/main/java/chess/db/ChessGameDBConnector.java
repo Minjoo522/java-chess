@@ -12,7 +12,7 @@ public class ChessGameDBConnector {
 
     private final String database;
 
-    ChessGameDBConnector(String database) {
+    public ChessGameDBConnector(String database) {
         this.database = database;
     }
 

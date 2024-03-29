@@ -124,6 +124,6 @@ public abstract boolean isKing();
 - [x] DBConnector 네이밍 & 역할
 - [x] PieceType : 생성자 사용으로 통일
 - [x] ChessGameDBService 이름 변경
-- [ ] DBConnector 생성자
+- [x] DBConnector 생성자
 - [ ] game 테이블
 - [ ] ChessGameDBConnector null -> 예외 던지기
