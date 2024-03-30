@@ -108,7 +108,7 @@ abcdefgh
 ---
 
 ## 리팩터링
-- [ ] Controller 커멘드 분기 처리 모으기
+- [x] Controller 커멘드 분기 처리 모으기
 - [x] 구현체에 대한 정보가 인터페이스에 많이 드러난다
 ```java
 public abstract boolean isPawn();
@@ -117,7 +117,7 @@ public abstract boolean isKing();
 ```
 - [x] README.md 어플리케이션 실행 방법 정리
 - [x] ScoreManager ↔️ ChessState 객체끼리 서로 물어보며 점수 계산
-- [ ] ScoreManager 상수 사용 or 각 객체에서 자신의 점수 계산
+- [x] ScoreManager 상수 사용 or 각 객체에서 자신의 점수 계산
 - [x] DBService 네이밍
   - [x] 무엇을 위한 서비스인지 고민
   - [x] 도메인을 서비스에서 만들어서 반환
@@ -125,5 +125,4 @@ public abstract boolean isKing();
 - [x] PieceType : 생성자 사용으로 통일
 - [x] ChessGameDBService 이름 변경
 - [x] DBConnector 생성자
-- [ ] game 테이블
 - [x] ChessGameDBConnector null -> 예외 던지기
