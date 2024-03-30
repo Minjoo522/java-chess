@@ -67,4 +67,11 @@ public class ChessGameService {
         turnsDao.deleteAll();
         turnsDao.create(turn);
     }
+
+    public void deleteAll() {
+        if (hasPreviousData()) {
+            piecesDao.deleteAll();
+            turnsDao.deleteAll();
+        }
+    }
 }
