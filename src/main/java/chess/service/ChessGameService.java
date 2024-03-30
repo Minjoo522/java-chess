@@ -2,7 +2,7 @@ package chess.service;
 
 import chess.db.PiecesDao;
 import chess.db.TurnsDao;
-import chess.domain.Board;
+import chess.domain.board.Board;
 import chess.domain.ChessGame;
 import chess.domain.color.Color;
 import chess.domain.piece.Piece;

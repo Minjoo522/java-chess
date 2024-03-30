@@ -3,8 +3,8 @@ package chess.domain.state;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
-import chess.domain.BlankBoard;
-import chess.domain.Board;
+import chess.domain.board.BlankBoard;
+import chess.domain.board.Board;
 import chess.domain.color.Color;
 import chess.domain.piece.nonsliding.King;
 import chess.domain.piece.pawn.WhiteFirstPawn;

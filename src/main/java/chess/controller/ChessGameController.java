@@ -1,11 +1,11 @@
 package chess.controller;
 
 import chess.db.ChessGameDBConnector;
-import chess.domain.Board;
+import chess.domain.board.Board;
 import chess.service.ChessGameService;
 import chess.db.PiecesDaoForMysql;
 import chess.db.TurnsDaoForMysql;
-import chess.domain.BoardFactory;
+import chess.domain.board.BoardFactory;
 import chess.domain.ChessGame;
 import chess.domain.position.Positions;
 import chess.domain.score.Scores;

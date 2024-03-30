@@ -5,9 +5,9 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
-import chess.domain.BlankBoard;
-import chess.domain.Board;
-import chess.domain.BoardFactory;
+import chess.domain.board.BlankBoard;
+import chess.domain.board.Board;
+import chess.domain.board.BoardFactory;
 import chess.domain.color.Color;
 import chess.domain.piece.PieceType;
 import chess.domain.piece.pawn.BlackFirstPawn;
