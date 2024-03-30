@@ -180,7 +180,7 @@ class BoardTest {
         ));
         Board board = new Board(rawBoard);
 
-        board.update(new Positions(new Position(1, 2), new Position(1, 4)));
+        board.update(new Positions(new Position(1, 2), new Position(1, 4)), new WhiteFirstPawn());
 
         assertAll(
                 () -> assertThat(board.getPiece(new Position(1, 2))).isInstanceOf(Blank.class),

@@ -1,11 +1,11 @@
 package chess.domain.piece;
 
+import chess.domain.Board;
 import chess.domain.color.Color;
 import chess.domain.position.Position;
 import chess.domain.position.Positions;
 import chess.domain.score.Score;
 import chess.domain.state.ChessState;
-import java.util.Map;
 import java.util.Set;
 
 public abstract class Piece {
@@ -17,7 +17,7 @@ public abstract class Piece {
 
     public abstract Set<Position> findPath(Positions positions);
 
-    public abstract ChessState state(Map<Position, Piece> board);
+    public abstract ChessState state(Board board);
 
     public abstract boolean isBlank();
 

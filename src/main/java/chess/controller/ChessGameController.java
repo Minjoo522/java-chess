@@ -1,6 +1,7 @@
 package chess.controller;
 
 import chess.db.ChessGameDBConnector;
+import chess.domain.Board;
 import chess.service.ChessGameService;
 import chess.db.PiecesDaoForMysql;
 import chess.db.TurnsDaoForMysql;
@@ -60,7 +61,8 @@ public class ChessGameController {
         if (chessGameService.hasPreviousData()) {
             return chessGameService.getCurrentChessGame();
         }
-        return new ChessGame(new BoardFactory().getInitialBoard());
+        Board board = new Board(new BoardFactory().getInitialBoard());
+        return new ChessGame(board);
     }
 
     private String readGameCommand() {

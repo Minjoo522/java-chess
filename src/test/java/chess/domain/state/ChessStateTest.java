@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 import chess.domain.BlankBoard;
+import chess.domain.Board;
 import chess.domain.color.Color;
-import chess.domain.piece.Piece;
 import chess.domain.piece.nonsliding.King;
 import chess.domain.piece.pawn.WhiteFirstPawn;
 import chess.domain.position.Position;
@@ -22,10 +22,10 @@ public class ChessStateTest {
     @TestFactory
     @DisplayName("선택된 말에 따라 전략을 선택한다.")
     Collection<DynamicTest> changeStrategy() {
-        Map<Position, Piece> board = new BlankBoard().fillWith(Map.of(
+        Board board = new Board(new BlankBoard().fillWith(Map.of(
                 new Position(4, 4), new King(Color.WHITE),
                 new Position(4, 3), new WhiteFirstPawn()
-        ));
+        )));
 
         return List.of(
                 dynamicTest("빈칸을 선택하면 BlankChessStrategy를 반환한다.", () -> {
@@ -49,9 +49,9 @@ public class ChessStateTest {
     @Test
     @DisplayName("현재 보드에 왕이 2개가 아니면 왕이 잡혔다고 알린다.")
     void isKingCaptured() {
-        Map<Position, Piece> board = new BlankBoard().fillWith(Map.of(
+        Board board = new Board(new BlankBoard().fillWith(Map.of(
                 new Position(1, 5), new King(Color.WHITE)
-        ));
+        )));
         GeneralChessState chessState = new GeneralChessState(board);
 
         assertThat(chessState.isKingCaptured()).isTrue();
@@ -60,9 +60,10 @@ public class ChessStateTest {
     @Test
     @DisplayName("이미 잡혀서 존재하지 않는 말의 색을 반환한다.")
     void announceCapturedKingColor() {
-        Map<Position, Piece> board = new BlankBoard().fillWith(Map.of(
+        Board board = new Board(new BlankBoard().fillWith(Map.of(
                 new Position(1, 5), new King(Color.WHITE)
-        ));
+        ))
+        );
         GeneralChessState chessState = new GeneralChessState(board);
 
         assertThat(chessState.announceCapturedKingColor()).isEqualTo(Color.BLACK);

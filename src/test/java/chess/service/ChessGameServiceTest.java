@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 import chess.db.FakePiecesDao;
 import chess.db.FakeTurnsDao;
+import chess.domain.Board;
 import chess.domain.ChessGame;
 import chess.domain.color.Color;
 import chess.domain.piece.Piece;
@@ -34,7 +35,7 @@ class ChessGameServiceTest {
                 new Position(1, 1), new Rook(Color.WHITE),
                 new Position(1, 2), new WhiteFirstPawn()
         );
-        ChessGame chessGame = new ChessGame(board, Color.BLACK);
+        ChessGame chessGame = new ChessGame(new Board(board), Color.BLACK);
 
         chessGameService.saveGame(chessGame);
 
@@ -49,7 +50,7 @@ class ChessGameServiceTest {
                 new Position(1, 1), new Rook(Color.WHITE),
                 new Position(1, 2), new WhiteFirstPawn()
         );
-        ChessGame chessGame = new ChessGame(board, Color.BLACK);
+        ChessGame chessGame = new ChessGame(new Board(board), Color.BLACK);
 
         chessGameService.saveGame(chessGame);
 

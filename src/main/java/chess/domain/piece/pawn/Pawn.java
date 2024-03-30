@@ -1,14 +1,14 @@
 package chess.domain.piece.pawn;
 
-import chess.domain.score.Score;
+import chess.domain.Board;
 import chess.domain.color.Color;
 import chess.domain.piece.Direction;
 import chess.domain.piece.Piece;
 import chess.domain.position.Position;
 import chess.domain.position.Positions;
+import chess.domain.score.Score;
 import chess.domain.state.ChessState;
 import chess.domain.state.PawnChessState;
-import java.util.Map;
 import java.util.Set;
 
 public abstract class Pawn extends Piece {
@@ -48,7 +48,7 @@ public abstract class Pawn extends Piece {
     }
 
     @Override
-    public final ChessState state(Map<Position, Piece> board) {
+    public final ChessState state(Board board) {
         return new PawnChessState(board);
     }
 

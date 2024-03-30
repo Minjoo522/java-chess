@@ -12,6 +12,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Board {
+    private static final int KING_TOTAL = 2;
+
     private final Map<Position, Piece> board;
 
     public Board(Map<Position, Piece> board) {
@@ -20,7 +22,7 @@ public class Board {
 
     public ChessState getChessState(Position position) {
         Piece piece = board.get(position);
-        return piece.state(board);
+        return piece.state(this);
     }
 
     public Piece getPiece(Position position) {
@@ -36,7 +38,7 @@ public class Board {
     public boolean hasTwoKing() {
         return board.values().stream()
                 .filter(piece -> piece.isTypeOf(PieceType.kings()))
-                .count() == 2;
+                .count() == KING_TOTAL;
     }
 
     public Color getRemainKingColor() {
@@ -50,9 +52,8 @@ public class Board {
                 .color( );
     }
 
-    public void update(Positions positions) {
-        Piece piece = board.get(positions.from());
-        board.replace(positions.to(), piece);
+    public void update(Positions positions, Piece target) {
+        board.replace(positions.to(), target);
         board.replace(positions.from(), new Blank());
     }
 

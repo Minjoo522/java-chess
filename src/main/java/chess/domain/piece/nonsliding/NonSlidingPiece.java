@@ -1,13 +1,13 @@
 package chess.domain.piece.nonsliding;
 
+import chess.domain.Board;
 import chess.domain.color.Color;
 import chess.domain.piece.Direction;
 import chess.domain.piece.Piece;
 import chess.domain.position.Position;
 import chess.domain.position.Positions;
-import chess.domain.state.GeneralChessState;
 import chess.domain.state.ChessState;
-import java.util.Map;
+import chess.domain.state.GeneralChessState;
 import java.util.Set;
 
 public abstract class NonSlidingPiece extends Piece {
@@ -36,7 +36,7 @@ public abstract class NonSlidingPiece extends Piece {
     }
 
     @Override
-    public final ChessState state(Map<Position, Piece> board) {
+    public final ChessState state(Board board) {
         return new GeneralChessState(board);
     }
 }

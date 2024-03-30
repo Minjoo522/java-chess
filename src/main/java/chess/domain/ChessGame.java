@@ -1,26 +1,25 @@
 package chess.domain;
 
 import chess.domain.color.Color;
-import chess.domain.piece.Piece;
 import chess.domain.piece.PieceType;
 import chess.domain.position.Position;
 import chess.domain.position.Positions;
-import chess.domain.state.BlankChessState;
-import chess.domain.state.ChessState;
 import chess.domain.score.Score;
 import chess.domain.score.Scores;
+import chess.domain.state.BlankChessState;
+import chess.domain.state.ChessState;
 import java.util.Map;
 
 public class ChessGame {
     private ChessState chessState;
     private Color turnColor;
 
-    public ChessGame(Map<Position, Piece> board, Color turnColor) {
+    public ChessGame(Board board, Color turnColor) {
         this.chessState = new BlankChessState(board);
         this.turnColor = turnColor;
     }
 
-    public ChessGame(Map<Position, Piece> board) {
+    public ChessGame(Board board) {
         this(board, Color.WHITE);
     }
 

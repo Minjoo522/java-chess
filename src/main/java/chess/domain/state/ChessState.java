@@ -1,5 +1,6 @@
 package chess.domain.state;
 
+import chess.domain.Board;
 import chess.domain.color.Color;
 import chess.domain.piece.Piece;
 import chess.domain.piece.PieceType;
@@ -7,29 +8,21 @@ import chess.domain.position.Position;
 import chess.domain.position.Positions;
 import chess.domain.score.Score;
 import chess.domain.score.ScoreManager;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public abstract class ChessState {
-    private static final int FILE_MIN = 1;
-    private static final int FILE_MAX = 8;
-    private static final int KING_TOTAL = 2;
+    protected Board board;
 
-    protected final Map<Position, Piece> board;
 
-    protected ChessState(Map<Position, Piece> board) {
-        this.board = new HashMap<>(board);
+    protected ChessState(Board board) {
+        this.board = board;
     }
 
     public abstract void move(Color turnColor, Positions positions);
 
     public final ChessState changeStrategy(Position from) {
-        Piece selectedPiece = board.get(from);
-        return selectedPiece.state(board);
+        return board.getChessState(from);
     }
 
     protected final void checkTurnOf(Piece currentPiece, Color turnColor) {
@@ -39,46 +32,24 @@ public abstract class ChessState {
     }
 
     protected final boolean isNotAllBlankPath(Set<Position> path) {
-        return !path.stream()
-                .map(board::get)
-                .allMatch(Piece::isBlank);
+        return !board.isAllBlank(path);
     }
 
     public final boolean isKingCaptured() {
-        return board.values().stream()
-                .filter(piece -> piece.isTypeOf(PieceType.kings()))
-                .count() != KING_TOTAL;
+        return !board.hasTwoKing();
     }
 
     public final Color announceCapturedKingColor() {
-        return board.values().stream()
-                .filter(piece -> piece.isTypeOf(PieceType.kings()))
-                .findFirst()
-                .orElseThrow(() -> new IllegalStateException("왕이 모두 잡혔습니다."))
-                .color()
+        return board.getRemainKingColor()
                 .findOppositeColor();
     }
 
     public final Score calculateScore(Color color) {
         ScoreManager scoreManager = new ScoreManager();
-        return IntStream.rangeClosed(FILE_MIN, FILE_MAX)
-                .mapToObj(file -> findFilePieces(color, file))
-                .map(scoreManager::calculateFileScore)
-                .reduce(new Score(0), Score::add);
-    }
-
-    private List<Piece> findFilePieces(Color color, int file) {
-        return IntStream.rangeClosed(FILE_MIN, FILE_MAX)
-                .mapToObj(rank -> board.get(new Position(file, rank)))
-                .filter(piece -> piece.isSameColor(color))
-                .toList();
+        return null;
     }
 
     public final Map<Position, PieceType> collectBoard() {
-        return board.entrySet().stream()
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        entry -> entry.getValue().pieceType()
-                ));
+        return board.collectBoard();
     }
 }

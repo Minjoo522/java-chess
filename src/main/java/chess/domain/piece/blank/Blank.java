@@ -1,14 +1,14 @@
 package chess.domain.piece.blank;
 
-import chess.domain.score.Score;
+import chess.domain.Board;
 import chess.domain.color.Color;
 import chess.domain.piece.Piece;
 import chess.domain.piece.PieceType;
 import chess.domain.position.Position;
 import chess.domain.position.Positions;
+import chess.domain.score.Score;
 import chess.domain.state.BlankChessState;
 import chess.domain.state.ChessState;
-import java.util.Map;
 import java.util.Set;
 
 public final class Blank extends Piece {
@@ -32,7 +32,7 @@ public final class Blank extends Piece {
     }
 
     @Override
-    public ChessState state(Map<Position, Piece> board) {
+    public ChessState state(Board board) {
         return new BlankChessState(board);
     }
 
