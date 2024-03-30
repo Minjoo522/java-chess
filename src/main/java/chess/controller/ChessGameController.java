@@ -123,6 +123,7 @@ public class ChessGameController {
     private boolean canContinue(ChessGame chessGame, String command) {
         if (chessGame.isKingCaptured()) {
             outputView.printResult(chessGame.findLoser(), chessGame.findWinner());
+            chessGameService.deleteAll();
             return false;
         }
         return isNotEnd(chessGame, command);
