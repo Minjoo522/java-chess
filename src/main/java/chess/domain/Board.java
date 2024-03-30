@@ -4,6 +4,7 @@ import chess.domain.piece.Piece;
 import chess.domain.position.Position;
 import chess.domain.state.ChessState;
 import java.util.Map;
+import java.util.Set;
 
 public class Board {
     private final Map<Position, Piece> board;
@@ -19,5 +20,11 @@ public class Board {
 
     public Piece getPiece(Position position) {
         return board.get(position);
+    }
+
+    public boolean isAllBlank(Set<Position> positions) {
+        return positions.stream()
+                .map(board::get)
+                .allMatch(Piece::isBlank);
     }
 }
