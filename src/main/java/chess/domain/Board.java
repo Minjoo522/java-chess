@@ -3,7 +3,9 @@ package chess.domain;
 import chess.domain.color.Color;
 import chess.domain.piece.Piece;
 import chess.domain.piece.PieceType;
+import chess.domain.piece.blank.Blank;
 import chess.domain.position.Position;
+import chess.domain.position.Positions;
 import chess.domain.state.ChessState;
 import java.util.Map;
 import java.util.Set;
@@ -47,6 +49,13 @@ public class Board {
                 .orElseThrow(() -> new IllegalStateException("왕이 모두 잡혔습니다."))
                 .color( );
     }
+
+    public void update(Positions positions) {
+        Piece piece = board.get(positions.from());
+        board.replace(positions.to(), piece);
+        board.replace(positions.from(), new Blank());
+    }
+
 
     public Map<Position, PieceType> collectBoard() {
         return board.entrySet().stream()
