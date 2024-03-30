@@ -16,4 +16,8 @@ public class Board {
         Piece piece = board.get(position);
         return piece.state(board);
     }
+
+    public Piece getPiece(Position position) {
+        return board.get(position);
+    }
 }

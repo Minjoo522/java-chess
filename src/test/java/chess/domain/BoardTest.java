@@ -34,4 +34,18 @@ class BoardTest {
                 () -> assertThat(board.getChessState(new Position(1, 3))).isInstanceOf(BlankChessState.class)
         );
     }
+
+    @Test
+    @DisplayName("특정 위치에 있는 말을 찾는다.")
+    void getPiece() {
+        Map<Position, Piece> rawBoard = Map.of(
+                new Position(1, 1), new Rook(Color.WHITE)
+        );
+        Board board = new Board(rawBoard);
+
+        assertAll(
+                () -> assertThat(board.getPiece(new Position(1, 1))).isInstanceOf(Rook.class),
+                () -> assertThat(board.getPiece(new Position(1, 1)).color()).isEqualTo(Color.WHITE)
+        );
+    }
 }
