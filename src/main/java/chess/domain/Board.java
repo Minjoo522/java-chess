@@ -1,5 +1,6 @@
 package chess.domain;
 
+import chess.domain.color.Color;
 import chess.domain.piece.Piece;
 import chess.domain.piece.PieceType;
 import chess.domain.position.Position;
@@ -33,5 +34,16 @@ public class Board {
         return board.values().stream()
                 .filter(piece -> piece.isTypeOf(PieceType.kings()))
                 .count() == 2;
+    }
+
+    public Color getRemainKingColor() {
+        if (hasTwoKing()) {
+            throw new IllegalStateException("아직 게임이 끝나지 않아 남은 킹의 색상을 확인할 수 없습니다.");
+        }
+        return board.values().stream()
+                .filter(piece -> piece.isTypeOf(PieceType.kings()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("왕이 모두 잡혔습니다."))
+                .color( );
     }
 }

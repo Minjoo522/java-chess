@@ -1,6 +1,7 @@
 package chess.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import chess.domain.color.Color;
@@ -117,6 +118,51 @@ class BoardTest {
             Board board = new Board(rawBoard);
 
             assertThat(board.hasTwoKing()).isFalse();
+        }
+    }
+
+    @Nested
+    @DisplayName("남아 있는 킹의 색상을 확인한다.")
+    class RemainKing {
+
+        @Test
+        @DisplayName("킹이 둘 다 살아있으면 남아 있는 킹의 색상을 확인할 수 없으므로 예외가 발생한다.")
+        void getRemainKingColorWhenHasTwoKing() {
+            Map<Position, Piece> rawBoard = Map.of(
+                    new Position(4, 1), new King(Color.WHITE),
+                    new Position(4, 8), new King(Color.BLACK)
+            );
+            Board board = new Board(rawBoard);
+
+            assertThatIllegalStateException()
+                    .isThrownBy(board::getRemainKingColor)
+                    .withMessage("아직 게임이 끝나지 않아 남은 킹의 색상을 확인할 수 없습니다.");
+        }
+
+        @Test
+        @DisplayName("킹이 하나만 남아있으면 남은 킹의 색상을 반환한다.")
+        void getRemainKingColor() {
+            Map<Position, Piece> rawBoard = Map.of(
+                    new Position(4, 1), new King(Color.WHITE),
+                    new Position(4, 8), new Queen(Color.BLACK)
+            );
+            Board board = new Board(rawBoard);
+
+            assertThat(board.getRemainKingColor()).isEqualTo(Color.WHITE);
+        }
+
+        @Test
+        @DisplayName("킹이 하나도 없는 경우 게임이 이미 종료되었으므로 예외가 발생한다.")
+        void getRemainKingPositionWhenHasNoKing() {
+            Map<Position, Piece> rawBoard = Map.of(
+                    new Position(1, 1), new Rook(Color.WHITE),
+                    new Position(1, 2), new WhiteFirstPawn()
+            );
+            Board board = new Board(rawBoard);
+
+            assertThatIllegalStateException()
+                    .isThrownBy(board::getRemainKingColor)
+                    .withMessage("왕이 모두 잡혔습니다.");
         }
     }
 }
