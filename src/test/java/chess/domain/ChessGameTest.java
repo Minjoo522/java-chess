@@ -45,26 +45,4 @@ class ChessGameTest {
                 })
         );
     }
-
-//    @Test
-//    @DisplayName("각 색깔별 말의 총 점수를 구한다.")
-//    void calculateScores() {
-//        Board board = new Board(new BlankBoard().fillWith(Map.of(
-//                // White
-//                new Position(1, 1), new Rook(Color.WHITE), // 5점
-//                new Position(2, 1), new Knight(Color.WHITE), // 2.5점
-//                new Position(3, 1), new Bishop(Color.WHITE), // 3점
-//                new Position(1, 2), new WhiteFirstPawn(), // 1점
-//                // Black
-//                new Position(4, 8), new Queen(Color.BLACK), // 9점
-//                new Position(5, 8), new King(Color.BLACK), // 0점
-//                new Position(1, 7), new BlackFirstPawn() // 1점
-//        )));
-//        ChessGame chessGame = new ChessGame(board);
-//
-//        assertAll(
-//                () -> assertThat(chessGame.calculateScores().getWhiteScore()).isEqualTo(new Score(11.5)),
-//                () -> assertThat(chessGame.calculateScores().getBlackScore()).isEqualTo(new Score(10))
-//        );
-//    }
 }

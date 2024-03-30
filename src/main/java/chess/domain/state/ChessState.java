@@ -45,8 +45,8 @@ public abstract class ChessState {
     }
 
     public final Score calculateScore(Color color) {
-        ScoreManager scoreManager = new ScoreManager();
-        return null;
+        ScoreManager scoreManager = new ScoreManager(board);
+        return scoreManager.calculateScore(color);
     }
 
     public final Map<Position, PieceType> collectBoard() {

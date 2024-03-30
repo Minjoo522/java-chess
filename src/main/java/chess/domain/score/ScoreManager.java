@@ -1,5 +1,7 @@
 package chess.domain.score;
 
+import chess.domain.Board;
+import chess.domain.color.Color;
 import chess.domain.piece.Piece;
 import chess.domain.piece.PieceType;
 import java.util.List;
@@ -8,7 +10,20 @@ public class ScoreManager {
     private static final int PAWN_SCORE_CHANGE_THRESHOLD = 2;
     private static final double OPTIONAL_PAWN_SCORE = 0.5;
 
-    public Score calculateFileScore(List<Piece> pieces) {
+    private final Board board;
+
+    public ScoreManager(Board board) {
+        this.board = board;
+    }
+
+    public Score calculateScore(Color color) {
+        List<List<Piece>> allPieces = board.findAllPiecesOf(color);
+        return allPieces.stream()
+                .map(this::calculatePiecesScore)
+                .reduce(new Score(0), Score::add);
+    }
+
+    private Score calculatePiecesScore(List<Piece> pieces) {
         Score baseScore = calculateBaseScore(pieces);
         int pawnCount = calculatePawnCount(pieces);
         if (pawnCount >= PAWN_SCORE_CHANGE_THRESHOLD) {
