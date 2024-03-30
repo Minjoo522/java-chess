@@ -7,6 +7,7 @@ import chess.domain.position.Position;
 import chess.domain.state.ChessState;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Board {
     private final Map<Position, Piece> board;
@@ -45,5 +46,13 @@ public class Board {
                 .findFirst()
                 .orElseThrow(() -> new IllegalStateException("왕이 모두 잡혔습니다."))
                 .color( );
+    }
+
+    public Map<Position, PieceType> collectBoard() {
+        return board.entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> entry.getValue().pieceType()
+                ));
     }
 }

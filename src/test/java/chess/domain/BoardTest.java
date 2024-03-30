@@ -6,9 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 import chess.domain.color.Color;
 import chess.domain.piece.Piece;
+import chess.domain.piece.PieceType;
 import chess.domain.piece.blank.Blank;
 import chess.domain.piece.nonsliding.King;
+import chess.domain.piece.nonsliding.Knight;
+import chess.domain.piece.pawn.BlackFirstPawn;
 import chess.domain.piece.pawn.WhiteFirstPawn;
+import chess.domain.piece.sliding.Bishop;
 import chess.domain.piece.sliding.Queen;
 import chess.domain.piece.sliding.Rook;
 import chess.domain.position.Position;
@@ -164,5 +168,29 @@ class BoardTest {
                     .isThrownBy(board::getRemainKingColor)
                     .withMessage("왕이 모두 잡혔습니다.");
         }
+    }
+
+    @Test
+    @DisplayName("보드를 가공하여 위치와 적합한 피스 모양을 모두 반환한다.")
+    void collectBoard() {
+        Map<Position, Piece> rawBoard = Map.of(
+                new Position(1, 1), new Rook(Color.WHITE),
+                new Position(2, 1), new Knight(Color.WHITE),
+                new Position(3, 1), new Bishop(Color.WHITE),
+                new Position(4, 1), new Queen(Color.WHITE),
+                new Position(5, 1), new King(Color.WHITE),
+                new Position(1, 2), new WhiteFirstPawn()
+        );
+        Board board = new Board(rawBoard);
+        Map<Position, PieceType> expected = Map.of(
+                new Position(1, 1), PieceType.WHITE_ROOK,
+                new Position(2, 1), PieceType.WHITE_KNIGHT,
+                new Position(3, 1), PieceType.WHITE_BISHOP,
+                new Position(4, 1), PieceType.WHITE_QUEEN,
+                new Position(5, 1), PieceType.WHITE_KING,
+                new Position(1, 2), PieceType.WHITE_FIRST_PAWN
+        );
+
+        assertThat(board.collectBoard()).isEqualTo(expected);
     }
 }
