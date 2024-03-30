@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import chess.domain.color.Color;
 import chess.domain.piece.Piece;
 import chess.domain.piece.blank.Blank;
+import chess.domain.piece.nonsliding.King;
 import chess.domain.piece.pawn.WhiteFirstPawn;
+import chess.domain.piece.sliding.Queen;
 import chess.domain.piece.sliding.Rook;
 import chess.domain.position.Position;
 import chess.domain.state.BlankChessState;
@@ -86,6 +88,35 @@ class BoardTest {
             );
 
             assertThat(board.isAllBlank(positions)).isFalse();
+        }
+    }
+
+    @Nested
+    @DisplayName("보드에 킹이 두 개 다 있는지 확인한다.")
+    class KingCountCheck {
+
+        @Test
+        @DisplayName("보드에 킹이 두 개 다 있으면 true를 반환한다.")
+        void hasTwoKing() {
+            Map<Position, Piece> rawBoard = Map.of(
+                    new Position(4, 1), new King(Color.WHITE),
+                    new Position(4, 8), new King(Color.BLACK)
+            );
+            Board board = new Board(rawBoard);
+
+            assertThat(board.hasTwoKing()).isTrue();
+        }
+
+        @Test
+        @DisplayName("보드에 킹이 한 개라도 없으면 false를 반환한다.")
+        void hasNotTwoKing() {
+            Map<Position, Piece> rawBoard = Map.of(
+                    new Position(4, 1), new King(Color.WHITE),
+                    new Position(4, 8), new Queen(Color.BLACK)
+            );
+            Board board = new Board(rawBoard);
+
+            assertThat(board.hasTwoKing()).isFalse();
         }
     }
 }

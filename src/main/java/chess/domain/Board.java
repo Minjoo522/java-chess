@@ -1,6 +1,7 @@
 package chess.domain;
 
 import chess.domain.piece.Piece;
+import chess.domain.piece.PieceType;
 import chess.domain.position.Position;
 import chess.domain.state.ChessState;
 import java.util.Map;
@@ -26,5 +27,11 @@ public class Board {
         return positions.stream()
                 .map(board::get)
                 .allMatch(Piece::isBlank);
+    }
+
+    public boolean hasTwoKing() {
+        return board.values().stream()
+                .filter(piece -> piece.isTypeOf(PieceType.kings()))
+                .count() == 2;
     }
 }
