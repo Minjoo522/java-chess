@@ -9,7 +9,7 @@ class ChessGameDBConnectorTest {
     @Test
     @DisplayName("데이터 베이스 연결 테스트")
     void connectDB() {
-        ChessGameDBConnector connector = new ChessGameDBConnector("chess_test");
+        ChessGameDBConnector connector = new ChessGameDBConnector("chess");
 
         Assertions.assertThat(connector.getConnection()).isNotNull();
     }
